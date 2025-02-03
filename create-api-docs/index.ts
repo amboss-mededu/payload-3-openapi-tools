@@ -1,6 +1,6 @@
 import type { RawOptions } from '../openapi/options';
 import generateDocs from './generate-docs';
-
+import { importPayloadConfig } from './importPayloadConfig';
 const generatorOptions: RawOptions = {
   disableAccessAnalysis: true,
   exclude: {
@@ -11,8 +11,12 @@ const generatorOptions: RawOptions = {
   }
 }
 
+const configPath = process.argv[2];
+
+const importedConfig = await importPayloadConfig(configPath);
+
 console.log("Generating OpenAPI docs");
 
-generateDocs(undefined, generatorOptions);
+generateDocs(importedConfig, undefined, generatorOptions);
 
 console.log("OpenAPI docs generated");
