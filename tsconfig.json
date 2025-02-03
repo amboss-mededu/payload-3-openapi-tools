@@ -10,6 +10,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["openapi/**/*", "create-api-docs/**/*"],
   "exclude": ["node_modules", "dist"]
 } 
