@@ -1,7 +1,0 @@
-workspaces/
-.husky/
-
-.eslintrc.json
-.prettierrc.json
-jest.config.ts
-tsconfig.json
