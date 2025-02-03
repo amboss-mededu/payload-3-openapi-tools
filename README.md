@@ -4,7 +4,7 @@ A plugin for Payload CMS that generates OpenAPI documentation for your API endpo
 
 ## Installation
 ```bash
-pnpm add -D github:tak-amboss/payload-openapi-tools
+pnpm add -D github:amboss-mededu/payload-3-openapi-tools
 ```
 
 ## Usage
