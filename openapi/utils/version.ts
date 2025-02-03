@@ -1,4 +1,8 @@
-import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export interface Version {
   major: number;
@@ -27,7 +31,9 @@ export const supports = (initialVersion: Version | undefined, currentVersion: Ve
 
 export const getPayloadVersion = async (): Promise<Version | undefined> => {
   try {
-    const { version } = await import(path.join(process.cwd(), 'node_modules/payload/package.json'));
+    const { version } = await import(join(dirname(dirname(__dirname)), 'node_modules/payload/package.json'), {
+      assert: { type: 'json' }
+    });
     return version ? toVersion(version) : undefined;
   } catch (e) {
     return undefined;
