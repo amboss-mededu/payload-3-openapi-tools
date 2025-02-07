@@ -31,8 +31,14 @@ const stripEmptyRequired = (schema) => {
         required: schema.required?.length ? schema.required : undefined,
     };
 };
+function removeHiddenFields(entity) {
+    return entity
+        .filter(field => !("hidden" in field) || field.hidden !== true);
+}
 export const entityToSchema = async (config, incomingEntity) => {
     const fieldDefinitionsMap = new Map();
+    // only the flattenedFields are used to generate the schema, so we need to remove the hidden fields from them
+    incomingEntity.flattenedFields = removeHiddenFields(incomingEntity.flattenedFields);
     const jsonschema = payloadEntityToJSONSchema(config, incomingEntity, fieldDefinitionsMap, 'text');
     const rawSchema = await convert(jsonschema);
     const fieldDefinitions = {};

@@ -1,0 +1,4315 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "@amboss/payload-3-openapi",
+        "version": "0.1.5",
+        "description": "OpenAPI documentation generator for PayloadCMS v3",
+        "license": {
+            "name": "MIT",
+            "url": "/api-docs/license"
+        }
+    },
+    "paths": {
+        "/posts": {
+            "get": {
+                "summary": "Find paginated Posts",
+                "description": "Find paginated Posts",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postssResponse"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new Post",
+                "description": "Create a new Post",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/postsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postsUpsertConfirmationResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update multiple Posts",
+                "description": "Update all Posts matching the where query",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/postsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postsBulkResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete multiple Posts",
+                "description": "Delete all Posts matching the where query",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postsBulkResponse"
+                    }
+                }
+            }
+        },
+        "/posts/{id}": {
+            "get": {
+                "summary": "Get a single Post by its id",
+                "description": "Get a single Post by its id",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postsResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Updates a Post",
+                "description": "Updates a Post",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/postsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postsUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes an existing Post",
+                "description": "Deletes an existing Post",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/postsUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            }
+        },
+        "/posts/count": {
+            "get": {
+                "summary": "Count Posts",
+                "description": "Count Posts",
+                "tags": [
+                    "posts"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/countResponse"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "summary": "Find paginated label functions are not supported",
+                "description": "Find paginated label functions are not supported",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/userssResponse"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new label functions are not supported",
+                "description": "Create a new label functions are not supported",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/usersRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersUpsertConfirmationResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update multiple label functions are not supported",
+                "description": "Update all label functions are not supported matching the where query",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/usersRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersBulkResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete multiple label functions are not supported",
+                "description": "Delete all label functions are not supported matching the where query",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersBulkResponse"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "summary": "Get a single label functions are not supported by its id",
+                "description": "Get a single label functions are not supported by its id",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the label functions are not supported",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Updates a label functions are not supported",
+                "description": "Updates a label functions are not supported",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the label functions are not supported",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/usersRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes an existing label functions are not supported",
+                "description": "Deletes an existing label functions are not supported",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the label functions are not supported",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            }
+        },
+        "/users/count": {
+            "get": {
+                "summary": "Count label functions are not supported",
+                "description": "Count label functions are not supported",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/countResponse"
+                    }
+                }
+            }
+        },
+        "/users/me": {
+            "get": {
+                "summary": "Current user data",
+                "description": "Data about the current user",
+                "tags": [
+                    "auth"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersMeResponse"
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "summary": "Login",
+                "description": "Login",
+                "tags": [
+                    "auth"
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/loginRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersMeResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/users/logout": {
+            "post": {
+                "summary": "Logout",
+                "description": "Logout",
+                "tags": [
+                    "auth"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/confirmationResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/NoUserErrorResponse"
+                    }
+                }
+            }
+        },
+        "/users/refresh-token": {
+            "post": {
+                "summary": "Refresh JWT",
+                "description": "Refresh the JWT token",
+                "tags": [
+                    "auth"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/usersMeResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            }
+        },
+        "/users/unlock": {
+            "post": {
+                "summary": "Unlock account",
+                "description": "Unlock account",
+                "tags": [
+                    "auth"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/unlockRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/confirmationResponse"
+                    }
+                }
+            }
+        },
+        "/payload-locked-documents": {
+            "get": {
+                "summary": "Find paginated Payload Locked Documents",
+                "description": "Find paginated Payload Locked Documents",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentssResponse"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new Payload Locked Document",
+                "description": "Create a new Payload Locked Document",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-locked-documentsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentsUpsertConfirmationResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update multiple Payload Locked Documents",
+                "description": "Update all Payload Locked Documents matching the where query",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-locked-documentsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentsBulkResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete multiple Payload Locked Documents",
+                "description": "Delete all Payload Locked Documents matching the where query",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentsBulkResponse"
+                    }
+                }
+            }
+        },
+        "/payload-locked-documents/{id}": {
+            "get": {
+                "summary": "Get a single Payload Locked Document by its id",
+                "description": "Get a single Payload Locked Document by its id",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Locked Document",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentsResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Updates a Payload Locked Document",
+                "description": "Updates a Payload Locked Document",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Locked Document",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-locked-documentsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentsUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes an existing Payload Locked Document",
+                "description": "Deletes an existing Payload Locked Document",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Locked Document",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-locked-documentsUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            }
+        },
+        "/payload-locked-documents/count": {
+            "get": {
+                "summary": "Count Payload Locked Documents",
+                "description": "Count Payload Locked Documents",
+                "tags": [
+                    "payload-locked-documents"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/countResponse"
+                    }
+                }
+            }
+        },
+        "/payload-preferences": {
+            "get": {
+                "summary": "Find paginated Payload Preferences",
+                "description": "Find paginated Payload Preferences",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencessResponse"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new Payload Preference",
+                "description": "Create a new Payload Preference",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-preferencesRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencesUpsertConfirmationResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update multiple Payload Preferences",
+                "description": "Update all Payload Preferences matching the where query",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-preferencesRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencesBulkResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete multiple Payload Preferences",
+                "description": "Delete all Payload Preferences matching the where query",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencesBulkResponse"
+                    }
+                }
+            }
+        },
+        "/payload-preferences/{id}": {
+            "get": {
+                "summary": "Get a single Payload Preference by its id",
+                "description": "Get a single Payload Preference by its id",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Preference",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencesResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Updates a Payload Preference",
+                "description": "Updates a Payload Preference",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Preference",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-preferencesRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencesUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes an existing Payload Preference",
+                "description": "Deletes an existing Payload Preference",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Preference",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-preferencesUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            }
+        },
+        "/payload-preferences/count": {
+            "get": {
+                "summary": "Count Payload Preferences",
+                "description": "Count Payload Preferences",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/countResponse"
+                    }
+                }
+            }
+        },
+        "/payload-preferences/{key}": {
+            "get": {
+                "summary": "custom operation",
+                "description": "custom operation",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "succesful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "custom operation",
+                "description": "custom operation",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "succesful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "custom operation",
+                "description": "custom operation",
+                "tags": [
+                    "payload-preferences"
+                ],
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "succesful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payload-migrations": {
+            "get": {
+                "summary": "Find paginated Payload Migrations",
+                "description": "Find paginated Payload Migrations",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationssResponse"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new Payload Migration",
+                "description": "Create a new Payload Migration",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-migrationsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationsUpsertConfirmationResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update multiple Payload Migrations",
+                "description": "Update all Payload Migrations matching the where query",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-migrationsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationsBulkResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete multiple Payload Migrations",
+                "description": "Delete all Payload Migrations matching the where query",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": false
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationsBulkResponse"
+                    }
+                }
+            }
+        },
+        "/payload-migrations/{id}": {
+            "get": {
+                "summary": "Get a single Payload Migration by its id",
+                "description": "Get a single Payload Migration by its id",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Migration",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by field",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "pass a where query to constrain returned documents (complex type, see documentation)",
+                        "style": "deepObject",
+                        "explode": true,
+                        "allowReserved": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit the returned documents to a certain number",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get a specific page of documents",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationsResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Updates a Payload Migration",
+                "description": "Updates a Payload Migration",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Migration",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/payload-migrationsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationsUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes an existing Payload Migration",
+                "description": "Deletes an existing Payload Migration",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Payload Migration",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "description": "number of levels to automatically populate relationships and uploads",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "retrieves document(s) in a specific locale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fallback-locale",
+                        "in": "query",
+                        "description": "specifies a fallback locale if no locale value exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/payload-migrationsUpsertConfirmationResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundErrorResponse"
+                    }
+                }
+            }
+        },
+        "/payload-migrations/count": {
+            "get": {
+                "summary": "Count Payload Migrations",
+                "description": "Count Payload Migrations",
+                "tags": [
+                    "payload-migrations"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/countResponse"
+                    }
+                }
+            }
+        },
+        "/access": {
+            "get": {
+                "summary": "custom operation",
+                "description": "custom operation",
+                "tags": [
+                    "auth",
+                    "custom"
+                ],
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/accessResponse",
+                        "description": "succesful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": []
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "jwt"
+            },
+            "cookieAuth": {
+                "in": "cookie",
+                "type": "apiKey",
+                "name": "payload-token"
+            }
+        },
+        "schemas": {
+            "error": {
+                "title": "Error response message",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "errors"
+                ]
+            },
+            "confirmation": {
+                "title": "Confirmation response message",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            },
+            "count": {
+                "title": "Count response message",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "totalDocs": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "totalDocs"
+                ]
+            },
+            "where": {
+                "title": "Where clause",
+                "type": "object",
+                "additionalProperties": {
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "equals": {}
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "not_equals": {}
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "greater_than": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        }
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "greater_than_equal": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        }
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "less_than": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        }
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "less_than_equal": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        }
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "like": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "contains": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "in": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "not_in": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "exists": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "near": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    ]
+                },
+                "properties": {
+                    "or": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    },
+                    "and": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/where"
+                        }
+                    }
+                },
+                "example": {
+                    "or": [
+                        {
+                            "color": {
+                                "equals": "mint"
+                            }
+                        },
+                        {
+                            "and": [
+                                {
+                                    "color": {
+                                        "equals": "white"
+                                    }
+                                },
+                                {
+                                    "featured": {
+                                        "equals": false
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "access": {
+                "title": "Access",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "canAccessAdmin": {
+                        "type": "boolean"
+                    },
+                    "collections": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "create": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "permission": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "permission"
+                                    ]
+                                },
+                                "read": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "permission": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "permission"
+                                    ]
+                                },
+                                "update": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "permission": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "permission"
+                                    ]
+                                },
+                                "delete": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "permission": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "permission"
+                                    ]
+                                },
+                                "fields": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "create": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "permission": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "permission"
+                                                ]
+                                            },
+                                            "read": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "permission": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "permission"
+                                                ]
+                                            },
+                                            "update": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "permission": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "permission"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "create",
+                                            "read",
+                                            "update"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "create",
+                                "read",
+                                "update",
+                                "delete",
+                                "fields"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "canAccessAdmin",
+                    "collections"
+                ]
+            },
+            "posts": {
+                "type": "object",
+                "additionalProperties": false,
+                "title": "Post",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "updatedAt",
+                    "createdAt"
+                ]
+            },
+            "postss": {
+                "type": "object",
+                "title": "Posts",
+                "properties": {
+                    "docs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/posts"
+                        }
+                    },
+                    "totalDocs": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    },
+                    "totalPages": {
+                        "type": "number"
+                    },
+                    "page": {
+                        "type": "number"
+                    },
+                    "pagingCounter": {
+                        "type": "number"
+                    },
+                    "hasPrevPage": {
+                        "type": "boolean"
+                    },
+                    "hasNextPage": {
+                        "type": "boolean"
+                    },
+                    "prevPage": {
+                        "type": "number"
+                    },
+                    "nextPage": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "docs",
+                    "totalDocs",
+                    "limit",
+                    "totalPages",
+                    "page",
+                    "pagingCounter",
+                    "hasPrevPage",
+                    "hasNextPage"
+                ]
+            },
+            "postsUpsertConfirmation": {
+                "type": "object",
+                "title": "Post upsert confirmation",
+                "properties": {
+                    "doc": {
+                        "$ref": "#/components/schemas/posts"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "doc",
+                    "message"
+                ]
+            },
+            "users": {
+                "type": "object",
+                "additionalProperties": false,
+                "title": "User",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "id",
+                    "updatedAt",
+                    "createdAt",
+                    "email"
+                ]
+            },
+            "userss": {
+                "type": "object",
+                "title": "label functions are not supported",
+                "properties": {
+                    "docs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/users"
+                        }
+                    },
+                    "totalDocs": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    },
+                    "totalPages": {
+                        "type": "number"
+                    },
+                    "page": {
+                        "type": "number"
+                    },
+                    "pagingCounter": {
+                        "type": "number"
+                    },
+                    "hasPrevPage": {
+                        "type": "boolean"
+                    },
+                    "hasNextPage": {
+                        "type": "boolean"
+                    },
+                    "prevPage": {
+                        "type": "number"
+                    },
+                    "nextPage": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "docs",
+                    "totalDocs",
+                    "limit",
+                    "totalPages",
+                    "page",
+                    "pagingCounter",
+                    "hasPrevPage",
+                    "hasNextPage"
+                ]
+            },
+            "usersUpsertConfirmation": {
+                "type": "object",
+                "title": "label functions are not supported upsert confirmation",
+                "properties": {
+                    "doc": {
+                        "$ref": "#/components/schemas/users"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "doc",
+                    "message"
+                ]
+            },
+            "usersMe": {
+                "title": "Me",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/users",
+                        "nullable": true
+                    },
+                    "token": {
+                        "type": "string"
+                    },
+                    "exp": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "user"
+                ]
+            },
+            "payload-locked-documents": {
+                "type": "object",
+                "additionalProperties": false,
+                "title": "PayloadLockedDocument",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "document": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "relationTo": {
+                                        "enum": [
+                                            "posts"
+                                        ]
+                                    },
+                                    "value": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/posts"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "value",
+                                    "relationTo"
+                                ],
+                                "nullable": true
+                            },
+                            {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "relationTo": {
+                                        "enum": [
+                                            "users"
+                                        ]
+                                    },
+                                    "value": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/users"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "value",
+                                    "relationTo"
+                                ],
+                                "nullable": true
+                            }
+                        ]
+                    },
+                    "globalSlug": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "user": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "relationTo": {
+                                        "enum": [
+                                            "users"
+                                        ]
+                                    },
+                                    "value": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/users"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "value",
+                                    "relationTo"
+                                ]
+                            }
+                        ]
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "user",
+                    "updatedAt",
+                    "createdAt"
+                ]
+            },
+            "payload-locked-documentss": {
+                "type": "object",
+                "title": "Payload Locked Documents",
+                "properties": {
+                    "docs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/payload-locked-documents"
+                        }
+                    },
+                    "totalDocs": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    },
+                    "totalPages": {
+                        "type": "number"
+                    },
+                    "page": {
+                        "type": "number"
+                    },
+                    "pagingCounter": {
+                        "type": "number"
+                    },
+                    "hasPrevPage": {
+                        "type": "boolean"
+                    },
+                    "hasNextPage": {
+                        "type": "boolean"
+                    },
+                    "prevPage": {
+                        "type": "number"
+                    },
+                    "nextPage": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "docs",
+                    "totalDocs",
+                    "limit",
+                    "totalPages",
+                    "page",
+                    "pagingCounter",
+                    "hasPrevPage",
+                    "hasNextPage"
+                ]
+            },
+            "payload-locked-documentsUpsertConfirmation": {
+                "type": "object",
+                "title": "Payload Locked Document upsert confirmation",
+                "properties": {
+                    "doc": {
+                        "$ref": "#/components/schemas/payload-locked-documents"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "doc",
+                    "message"
+                ]
+            },
+            "payload-preferences": {
+                "type": "object",
+                "additionalProperties": false,
+                "title": "PayloadPreference",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "relationTo": {
+                                        "enum": [
+                                            "users"
+                                        ]
+                                    },
+                                    "value": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/users"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "value",
+                                    "relationTo"
+                                ]
+                            }
+                        ]
+                    },
+                    "key": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "value": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "array",
+                                "items": {}
+                            },
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "boolean"
+                            }
+                        ]
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "user",
+                    "updatedAt",
+                    "createdAt"
+                ]
+            },
+            "payload-preferencess": {
+                "type": "object",
+                "title": "Payload Preferences",
+                "properties": {
+                    "docs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/payload-preferences"
+                        }
+                    },
+                    "totalDocs": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    },
+                    "totalPages": {
+                        "type": "number"
+                    },
+                    "page": {
+                        "type": "number"
+                    },
+                    "pagingCounter": {
+                        "type": "number"
+                    },
+                    "hasPrevPage": {
+                        "type": "boolean"
+                    },
+                    "hasNextPage": {
+                        "type": "boolean"
+                    },
+                    "prevPage": {
+                        "type": "number"
+                    },
+                    "nextPage": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "docs",
+                    "totalDocs",
+                    "limit",
+                    "totalPages",
+                    "page",
+                    "pagingCounter",
+                    "hasPrevPage",
+                    "hasNextPage"
+                ]
+            },
+            "payload-preferencesUpsertConfirmation": {
+                "type": "object",
+                "title": "Payload Preference upsert confirmation",
+                "properties": {
+                    "doc": {
+                        "$ref": "#/components/schemas/payload-preferences"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "doc",
+                    "message"
+                ]
+            },
+            "payload-migrations": {
+                "type": "object",
+                "additionalProperties": false,
+                "title": "PayloadMigration",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "batch": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "updatedAt",
+                    "createdAt"
+                ]
+            },
+            "payload-migrationss": {
+                "type": "object",
+                "title": "Payload Migrations",
+                "properties": {
+                    "docs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/payload-migrations"
+                        }
+                    },
+                    "totalDocs": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    },
+                    "totalPages": {
+                        "type": "number"
+                    },
+                    "page": {
+                        "type": "number"
+                    },
+                    "pagingCounter": {
+                        "type": "number"
+                    },
+                    "hasPrevPage": {
+                        "type": "boolean"
+                    },
+                    "hasNextPage": {
+                        "type": "boolean"
+                    },
+                    "prevPage": {
+                        "type": "number"
+                    },
+                    "nextPage": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "docs",
+                    "totalDocs",
+                    "limit",
+                    "totalPages",
+                    "page",
+                    "pagingCounter",
+                    "hasPrevPage",
+                    "hasNextPage"
+                ]
+            },
+            "payload-migrationsUpsertConfirmation": {
+                "type": "object",
+                "title": "Payload Migration upsert confirmation",
+                "properties": {
+                    "doc": {
+                        "$ref": "#/components/schemas/payload-migrations"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "doc",
+                    "message"
+                ]
+            }
+        },
+        "responses": {
+            "InvalidRequestErrorResponse": {
+                "description": "invalid request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            },
+            "UnauthorizedErrorResponse": {
+                "description": "unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            },
+            "NotFoundErrorResponse": {
+                "description": "not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            },
+            "countResponse": {
+                "description": "count",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/count"
+                        }
+                    }
+                }
+            },
+            "confirmationResponse": {
+                "description": "confirmed",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/confirmation"
+                        }
+                    }
+                }
+            },
+            "NoUserErrorResponse": {
+                "description": "no user",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            },
+            "InvalidTokenErrorResponse": {
+                "description": "invalid token",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            },
+            "accessResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/access"
+                        }
+                    }
+                }
+            },
+            "postsResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/posts"
+                        }
+                    }
+                }
+            },
+            "postssResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/postss"
+                        }
+                    }
+                }
+            },
+            "postsUpsertConfirmationResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/postsUpsertConfirmation"
+                        }
+                    }
+                }
+            },
+            "postsBulkResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "docs": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/posts"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "usersResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/users"
+                        }
+                    }
+                }
+            },
+            "userssResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/userss"
+                        }
+                    }
+                }
+            },
+            "usersUpsertConfirmationResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/usersUpsertConfirmation"
+                        }
+                    }
+                }
+            },
+            "usersBulkResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "docs": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/users"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "usersMeResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/usersMe"
+                        }
+                    }
+                }
+            },
+            "payload-locked-documentsResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-locked-documents"
+                        }
+                    }
+                }
+            },
+            "payload-locked-documentssResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-locked-documentss"
+                        }
+                    }
+                }
+            },
+            "payload-locked-documentsUpsertConfirmationResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-locked-documentsUpsertConfirmation"
+                        }
+                    }
+                }
+            },
+            "payload-locked-documentsBulkResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "docs": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/payload-locked-documents"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "payload-preferencesResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-preferences"
+                        }
+                    }
+                }
+            },
+            "payload-preferencessResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-preferencess"
+                        }
+                    }
+                }
+            },
+            "payload-preferencesUpsertConfirmationResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-preferencesUpsertConfirmation"
+                        }
+                    }
+                }
+            },
+            "payload-preferencesBulkResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "docs": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/payload-preferences"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "payload-migrationsResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-migrations"
+                        }
+                    }
+                }
+            },
+            "payload-migrationssResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-migrationss"
+                        }
+                    }
+                }
+            },
+            "payload-migrationsUpsertConfirmationResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-migrationsUpsertConfirmation"
+                        }
+                    }
+                }
+            },
+            "payload-migrationsBulkResponse": {
+                "description": "ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "docs": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/payload-migrations"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "loginRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Login request",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "email",
+                                "password"
+                            ]
+                        }
+                    }
+                }
+            },
+            "unlockRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "email"
+                            ]
+                        }
+                    }
+                }
+            },
+            "postsRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/posts"
+                        }
+                    }
+                }
+            },
+            "usersRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/users"
+                        }
+                    }
+                }
+            },
+            "payload-locked-documentsRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-locked-documents"
+                        }
+                    }
+                }
+            },
+            "payload-preferencesRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-preferences"
+                        }
+                    }
+                }
+            },
+            "payload-migrationsRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/payload-migrations"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Payload REST API documentation",
+        "url": "https://payloadcms.com/docs/rest-api/overview"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ]
+}

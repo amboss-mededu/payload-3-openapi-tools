@@ -1,0 +1,13 @@
+{
+    "collections": [
+        {
+            "slug": "posts",
+            "fields": [
+                {
+                    "name": "title",
+                    "type": "text"
+                }
+            ]
+        }
+    ]
+}
