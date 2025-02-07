@@ -3328,30 +3328,6 @@
             "email": {
               "type": "string"
             },
-            "resetPasswordToken": {
-              "type": "string",
-              "nullable": true
-            },
-            "resetPasswordExpiration": {
-              "type": "string",
-              "nullable": true
-            },
-            "salt": {
-              "type": "string",
-              "nullable": true
-            },
-            "hash": {
-              "type": "string",
-              "nullable": true
-            },
-            "loginAttempts": {
-              "type": "number",
-              "nullable": true
-            },
-            "lockUntil": {
-              "type": "string",
-              "nullable": true
-            },
             "password": {
               "type": "string",
               "nullable": true

@@ -23,6 +23,7 @@
     "ts-essentials": "^9.4.1"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/lodash": "^4.14.195",
     "@types/node": "^22.13.0",
     "@types/jest": "^29.5.0",

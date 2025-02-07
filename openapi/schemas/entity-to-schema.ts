@@ -1,5 +1,5 @@
 import type { OpenAPIV3 } from 'openapi-types';
-import type { SanitizedConfig , SanitizedCollectionConfig, SanitizedGlobalConfig } from 'payload';
+import type { SanitizedConfig , SanitizedCollectionConfig, SanitizedGlobalConfig, Field, FlattenedField } from 'payload';
 import { entityToJSONSchema as payloadEntityToJSONSchema } from 'payload';
 import convert from '@openapi-contrib/json-schema-to-openapi-schema';
 import { getDescription, getSingularSchemaName } from '../utils';
@@ -42,12 +42,22 @@ const stripEmptyRequired = (schema: OpenAPIV3.SchemaObject): OpenAPIV3.SchemaObj
   };
 };
 
+function removeHiddenFields<T extends FlattenedField | Field>(entity: T[]): T[] {
+  return entity
+    .filter(field => !("hidden" in field) || field.hidden !== true)
+}
+
 export const entityToSchema = async (
   config: SanitizedConfig,
   incomingEntity: SanitizedCollectionConfig | SanitizedGlobalConfig,
 ): Promise<{ schema: OpenAPIV3.SchemaObject; fieldDefinitions: Record<string, OpenAPIV3.SchemaObject> }> => {
   const fieldDefinitionsMap = new Map();
+
+  // only the flattenedFields are used to generate the schema, so we need to remove the hidden fields from them
+  incomingEntity.flattenedFields = removeHiddenFields(incomingEntity.flattenedFields);
+
   const jsonschema = payloadEntityToJSONSchema(config, incomingEntity, fieldDefinitionsMap, 'text');
+
   const rawSchema = await convert(jsonschema);
   
   const fieldDefinitions: Record<string, OpenAPIV3.SchemaObject> = {};
