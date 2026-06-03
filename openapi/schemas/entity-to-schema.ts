@@ -18,29 +18,46 @@ const cleanReferences = (schema: OpenAPIV3.SchemaObject, config: SanitizedConfig
 const isReferenceObject = (schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject): schema is OpenAPIV3.ReferenceObject =>
   '$ref' in schema;
 
-// Officialy empty required is allowed for openapi v3 and v3.1, but it's not for swagger v2 and some tools don't accept it
-const stripEmptyRequired = (schema: OpenAPIV3.SchemaObject): OpenAPIV3.SchemaObject => {
+// Officially empty required is allowed for OpenAPI v3 and v3.1, but it's not for Swagger v2 and some tools don't accept it.
+export const normalizeSchema = (schema: OpenAPIV3.SchemaObject): OpenAPIV3.SchemaObject => {
   if (schema.type === 'array') {
     return {
       ...schema,
-      items: isReferenceObject(schema.items) ? schema.items : stripEmptyRequired(schema.items),
+      enum: schema.enum && dedupeEnumValues(schema.enum),
+      items: isReferenceObject(schema.items) ? schema.items : normalizeSchema(schema.items),
     };
   }
 
   return {
     ...schema,
+    enum: schema.enum && dedupeEnumValues(schema.enum),
     properties:
       schema.properties &&
       Object.entries(schema.properties).reduce((all, [key, value]) => {
-        all[key] = isReferenceObject(value) ? value : stripEmptyRequired(value);
+        all[key] = isReferenceObject(value) ? value : normalizeSchema(value);
         return all;
       }, {} as Record<string, OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject>),
-    oneOf: schema.oneOf?.map(option => (isReferenceObject(option) ? option : stripEmptyRequired(option))),
-    anyOf: schema.anyOf?.map(option => (isReferenceObject(option) ? option : stripEmptyRequired(option))),
-    allOf: schema.allOf?.map(option => (isReferenceObject(option) ? option : stripEmptyRequired(option))),
+    oneOf: schema.oneOf?.map(option => (isReferenceObject(option) ? option : normalizeSchema(option))),
+    anyOf: schema.anyOf?.map(option => (isReferenceObject(option) ? option : normalizeSchema(option))),
+    allOf: schema.allOf?.map(option => (isReferenceObject(option) ? option : normalizeSchema(option))),
     required: schema.required?.length ? schema.required : undefined,
   };
 };
+
+function dedupeEnumValues<T>(values: T[]): T[] {
+  const seenValues = new Set<string | undefined>();
+
+  return values.filter(value => {
+    const valueKey = JSON.stringify(value);
+
+    if (seenValues.has(valueKey)) {
+      return false;
+    }
+
+    seenValues.add(valueKey);
+    return true;
+  });
+}
 
 function removeHiddenFields<T extends FlattenedField | Field>(entity: T[]): T[] {
   return entity
@@ -63,13 +80,13 @@ export const entityToSchema = async (
   const fieldDefinitions: Record<string, OpenAPIV3.SchemaObject> = {};
   for (const [key, definition] of fieldDefinitionsMap.entries()) {
     const convertedDef = await convert(definition);
-    fieldDefinitions[key] = cleanReferences(stripEmptyRequired(convertedDef), config);
+    fieldDefinitions[key] = cleanReferences(normalizeSchema(convertedDef), config);
   }
 
   return {
     schema: {
       description: getDescription(incomingEntity),
-      ...cleanReferences(stripEmptyRequired(rawSchema), config),
+      ...cleanReferences(normalizeSchema(rawSchema), config),
     },
     fieldDefinitions,
   };
